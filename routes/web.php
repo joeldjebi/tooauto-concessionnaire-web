@@ -9,7 +9,6 @@ use App\Http\Controllers\AutodocController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\ConcessionnaireController;
 
-
 Route::group(['middleware' => ['auth']], function (){
 
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -55,13 +54,6 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/update-chauffeurs/{id}', [ChauffeurController::class, 'update'])->name('chauffeur.update');
     Route::delete('chauffeurs/{id}', [ChauffeurController::class, 'destroy'])->name('chauffeur.destroy');
 
-    Route::get('/liste-des-vehicules', [VehiculeController::class, 'index'])->name('vehicule.liste');    Route::get('/add-vehicules', [VehiculeController::class, 'addVehicule'])->name('vehicule.add');
-    Route::get('/edit-vehicules/{id}', [VehiculeController::class, 'editVehicule'])->name('vehicule.edit');
-    Route::post('/store-vehicules', [VehiculeController::class, 'store'])->name('vehicule.store');
-    Route::post('/update-vehicules/{id}', [VehiculeController::class, 'update'])->name('vehicule.update');
-    Route::delete('vehicules/{id}', [VehiculeController::class, 'destroy'])->name('vehicule.destroy');
-    Route::post('/vehicules/import-excel', [VehiculeController::class, 'importExcel'])->name('vehicule.importExcel');
-
     Route::get('/chauffeurs-by-fonction/{fonction_id}', [VehiculeController::class, 'getChauffeursByFonction'])->name('chauffeurs.byfonction');
 
     Route::get('/liste-des-autodocs', [AutodocController::class, 'index'])->name('autodoc.index');
@@ -94,9 +86,10 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/update-fonctions/{id}', [DashboardController::class, 'updateFonction'])->name('fonction.update');
     Route::delete('fonctions/{id}', [DashboardController::class, 'destroyFonction'])->name('fonction.destroy');
 
-    // Routes pour les véhicules
+    // Routes pour les véhicules (Fusionnées et uniques)
     Route::prefix('vehicule')->group(function () {
         Route::get('/', [VehiculeController::class, 'index'])->name('vehicule.index');
+        Route::get('/liste', [VehiculeController::class, 'index'])->name('vehicule.liste');
         Route::get('/add', [VehiculeController::class, 'addVehicule'])->name('vehicule.add');
         Route::post('/', [VehiculeController::class, 'store'])->name('vehicule.store');
         Route::get('/edit/{id}', [VehiculeController::class, 'editVehicule'])->name('vehicule.edit');
@@ -125,9 +118,9 @@ Route::group(['middleware' => ['auth']], function (){
 
 });
 
+// Connexion & Authentification
 Route::get('/', [AuthController::class, 'showlogin'])->name('login');
-
-Route::get('/login', [AuthController::class, 'showlogin'])->name('login');
+Route::get('/login', [AuthController::class, 'showlogin']); // Retrait du name('login') en doublon ici
 Route::post('/login', [AuthController::class, 'login'])->name('logins');
 
 Route::get('/register', [AuthController::class, 'showregister'])->name('register');
@@ -135,10 +128,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('registers')
 Route::get('/register-concessionnaire', [AuthController::class, 'showConcessionnaireRegister'])->name('register.concessionnaire');
 Route::post('/register-concessionnaire', [AuthController::class, 'registerConcessionnaire'])->name('register.concessionnaire.store');
 
-// Mot de passe oublié - Affichage du formulaire
+// Mot de passe oublié
 Route::get('/password/forget', [AuthController::class, 'showpasswordforget'])->name('password.forget');
-
-// Mot de passe oublié - Envoi OTP
 Route::post('/password/forget', [AuthController::class, 'postPasswordForget'])->name('post-password.forget');
 
 // Saisie OTP
