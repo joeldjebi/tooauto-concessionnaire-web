@@ -1,0 +1,50 @@
+body .customizer-links {
+    display: none !important;
+}
+
+.header .header-left .logo img {
+    width: 50px;
+}
+
+.card-services img.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.sidebar .sidebar-menu > ul > li.submenu-open ul li a {
+    font-size: 13px;
+}
+
+.contactus:hover {
+    color: #fff !important;
+}
+
+.contactus {
+    color: #fff !important;
+}
+
+span.badge.bg-outline-success {
+    color: green;
+}
+
+
+
+.header-left #toggle_btn {
+    background: #efc243;
+}
+
+.btn-primary {
+    background-color: #efc243 !important;
+    border-color: #efc243 !important;
+}
+
+.pagination li.active a.page-link {
+    background: #efc243;
+    border-color: #efc243;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100% !important;
+}
