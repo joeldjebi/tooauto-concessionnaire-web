@@ -55,8 +55,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/update-chauffeurs/{id}', [ChauffeurController::class, 'update'])->name('chauffeur.update');
     Route::delete('chauffeurs/{id}', [ChauffeurController::class, 'destroy'])->name('chauffeur.destroy');
 
-    Route::get('/liste-des-vehicules', [VehiculeController::class, 'index'])->name('vehicule.index');
-    Route::get('/add-vehicules', [VehiculeController::class, 'addVehicule'])->name('vehicule.add');
+    Route::get('/liste-des-vehicules', [VehiculeController::class, 'index'])->name('vehicule.liste');    Route::get('/add-vehicules', [VehiculeController::class, 'addVehicule'])->name('vehicule.add');
     Route::get('/edit-vehicules/{id}', [VehiculeController::class, 'editVehicule'])->name('vehicule.edit');
     Route::post('/store-vehicules', [VehiculeController::class, 'store'])->name('vehicule.store');
     Route::post('/update-vehicules/{id}', [VehiculeController::class, 'update'])->name('vehicule.update');
